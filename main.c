@@ -2,48 +2,36 @@
 #include <stdlib.h>
 #include <time.h>
 
-/*
- *	PROGRAM FOR GENERATING RANDOMISED PRACTICE TASKS
- *	IN THE AREA OF IP SUBNETTING
- */
-
-/*
- *	TODO	BETTER RANDOM NUMBER GENERATOR FUNCTION
- *			FUNCTION FOR MAKING ADDRESSES
- */
-
-int RandomNumber(int min, int max)
+typedef struct 
 {
-	static long int passageNumber = 0;
-	++passageNumber;
-	unsigned int seed = time(passageNumber);
-	return rand_r(&seed) % (max - min + 1) + min;	
+	int octets[4];
+} Address;
+
+Address GenerateRandomAddress(int min, int max)
+{
+	Address address;
+	unsigned int seed = time(0);
+
+	for (int i = 0; i < 4; i++)
+	{
+		address.octets[i] = rand_r(&seed) % (max - min + 1) + min;
+	}
+
+	return address;
 }
 
 int main(int argc, char **argv)
 {
 
-/*	for (int i = 0; i < argc; i++)
+/*	if (argc != 3)
 	{
-		printf("argv[%d]: %s\n", i, argv[i]);
-	}
-*/
-	if (argc != 3)
-	{
-		printf("Error: Expecting exactly 2 arguments, recieved %d\n", argc-1);
+		printf("Error: Expected exactly 2 arguments, recieved %d\n", argc-1);
 		return 1;
 	}
+*/
+	Address address = GenerateRandomAddress(10, 255);
 
-//	printf("Testing random number functionality...");
-
-
-	int	firstOctet = RandomNumber(strtol(argv[1], NULL, 10), strtol(argv[2], NULL, 10));
-	int	secondOctet = RandomNumber(strtol(argv[1], NULL, 10), strtol(argv[2], NULL, 10));
-	int	thirdOctet = RandomNumber(strtol(argv[1], NULL, 10), strtol(argv[2], NULL, 10));
-	int	fourthOctet = RandomNumber(strtol(argv[1], NULL, 10), strtol(argv[2], NULL, 10));
-
-
-	printf("%d.%d.%d.%d\n", firstOctet, secondOctet, thirdOctet, fourthOctet);
+	printf("%d.%d.%d.%d\n", address.octets[0], address.octets[1], address.octets[2], address.octets[3]);
 
 	return 0;
 }
