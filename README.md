@@ -1,6 +1,6 @@
 # IP Subnet Practice
 
-A simple CLI tool used for generating subnetting problems. Inteded for students to practice.
+A simple CLI tool used for generating subnetting problems. Intended for students to practice.
 
 ## How to install
 
