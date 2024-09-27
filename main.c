@@ -22,7 +22,6 @@ Address GenerateRandomAddress(int min, int max)
 		address.octets[i] = rand_r(&seed) % (max - min + 1) + min;
 
 	address.class = rand_r(&seed) % (65 - 69 + 1) + 65;
-	printf("debug: address.class = %d\n", address.class);
 	return address;
 }
 
@@ -35,12 +34,12 @@ Tasks GenerateAssignmentTasks()
  *					TASK
  *	a - # of networks	b - # of computers on each network
  *	
- *	i\j  0	  1
+ *		 0	  1
  *
  *	0	{a1, b1}
  *	1	{a2, b2}
  *	2	{a3, b3}
- *	3	{a4, b4}	this task is always point-to-point
+ *	3	{a4, b4}	this task is always a point-to-point network
  *
  */
 
@@ -63,7 +62,6 @@ Tasks GenerateAssignmentTasks()
 
 int main(int argc, char **argv)
 {
-
 	Address address = GenerateRandomAddress(10, 255);
 
 	Tasks tasks = GenerateAssignmentTasks();

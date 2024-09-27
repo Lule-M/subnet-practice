@@ -4,10 +4,12 @@ A simple CLI tool used for generating subnetting problems. Intended for students
 
 ## How to install
 
-Just compile from source (until something better is made)
+Just compile from source (until a makefile is made or something)
 
 ## How to use
 
-To be announced :)
+You can just run the program from the terminal, which writes to standard output. Alternatively you can use pandoc to save the output to a file.
 
+`./ipsp | pandoc -f textile -o subnet-practice.pdf`
 
+This runs the program, and saves its output to a pdf.
