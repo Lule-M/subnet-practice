@@ -4,16 +4,12 @@
 
 typedef struct
 {
-	/*int task1[2];
-	int task2[2];
-	int task3[2];
-	int task4[2];*/
 	int tasks[4][2];
-
 } Tasks;
 
 typedef struct 
 {
+	char class;
 	int octets[4];
 } Address;
 
@@ -23,10 +19,10 @@ Address GenerateRandomAddress(int min, int max)
 	unsigned int seed = time(0);
 
 	for (int i = 0; i < 4; i++)
-	{
 		address.octets[i] = rand_r(&seed) % (max - min + 1) + min;
-	}
 
+	address.class = rand_r(&seed) % (65 - 69 + 1) + 65;
+	printf("debug: address.class = %d\n", address.class);
 	return address;
 }
 
@@ -70,12 +66,13 @@ int main(int argc, char **argv)
 
 	Address address = GenerateRandomAddress(10, 255);
 
-	//printf("%d.%d.%d.%d\n", address.octets[0], address.octets[1], address.octets[2], address.octets[3]);
-
 	Tasks tasks = GenerateAssignmentTasks();
-	printf("Kompanija X poseduje opseg adresa klase B, %d.%d.%d.%d. Treba napraviti šemu podmrežavanja tako da se obezbedi:\n", address.octets[0], address.octets[1], address.octets[2], address.octets[3]);
+	printf("Kompanija X poseduje opseg adresa klase %c, %d.%d.%d.%d. Treba napraviti šemu podmrežavanja tako da se obezbedi:\n", address.class, address.octets[0], address.octets[1], address.octets[2], address.octets[3]);
 	for (int i = 0; i < 4; i++)
-		printf("- %d podmreže sa %d računara\n", tasks.tasks[i][0], tasks.tasks[i][1]);		
+		if (tasks.tasks[i][0] == 1)
+			printf("- %d podmreža sa %d računara\n", tasks.tasks[i][0], tasks.tasks[i][1]);		
+		else
+			printf("- %d podmreže sa %d računara\n", tasks.tasks[i][0], tasks.tasks[i][1]);		
 
 	return 0;
 }
