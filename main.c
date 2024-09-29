@@ -19,7 +19,14 @@ Address GenerateRandomAddress(int min, int max)
 	unsigned int seed = time(0);
 
 	for (int i = 0; i < 4; i++)
-		address.octets[i] = rand_r(&seed) % (max - min + 1) + min;
+	{
+		int generatedAddress = 0;
+		do
+		{
+			generatedAddress = rand_r(&seed) % (max - min + 1) + min;
+		} while ((generatedAddress == 127 || generatedAddress > 224) && i == 0);
+		address.octets[i] = generatedAddress;
+	}
 
 	address.class = rand_r(&seed) % (65 - 69 + 1) + 65;
 	return address;
@@ -52,7 +59,7 @@ Tasks GenerateAssignmentTasks()
 				continue;
 			}
 
-			if (j % 2 == 0)	// ensure we don't have a crazy ammount of networks
+			if (j % 2 == 0)	// ensure we don't have a crazy amount of networks
 				tasks.tasks[i][j] = rand_r(&seed) % (3 - 1 + 1) + 1;
 			else
 				tasks.tasks[i][j] = rand_r(&seed) % (255 - 3 + 1) + 3;
