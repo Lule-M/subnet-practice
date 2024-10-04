@@ -4,9 +4,9 @@
 
 typedef struct
 {
-	int networks[4];
-	int computers[4];
-} Tasks;
+	int networks;
+	int computers;
+} Task;
 
 typedef struct 
 {
@@ -39,20 +39,20 @@ Address GenerateRandomAddress(int min, int max)
 	return address;
 }
 
-Tasks GenerateTasks()
+Task *GenerateTasks()
 {
 	unsigned int seed = time(0);
 	
-	Tasks tasks;
+	Task tasks[4];
 
 	for (int i = 0; i < 4; i++)
 	{
-		tasks.networks[i] = rand_r(&seed) % (3 - 1 + 1) + 1;
+		tasks[i].networks = rand_r(&seed) % (3 - 1 + 1) + 1;
 
 		if (i == 3)	// the last task is always a point-to-point network
-			tasks.computers[i] = 2;
+			tasks[i].computers = 2;
 		else
-			tasks.computers[i] = rand_r(&seed) % (255 - 3 + 1) + 3;
+			tasks[i].computers = rand_r(&seed) % (255 - 3 + 1) + 3;
 	}
 
 	return tasks;
@@ -62,12 +62,12 @@ int main(int argc, char **argv)
 {
 	Address address = GenerateRandomAddress(10, 255);
 
-	Tasks tasks = GenerateTasks();
+	Task *tasks = GenerateTasks();
 	printf("Kompanija X poseduje opseg adresa klase %c, %d.%d.%d.%d. Treba napraviti šemu podmrežavanja tako da se obezbedi:\n", address.class, address.octets[0], address.octets[1], address.octets[2], address.octets[3]);
 	for (int i = 0; i < 4; i++)
-		if (tasks.networks[i] == 1)
-		printf("- %d podmreža sa %d računara\n", tasks.networks[i], tasks.computers[i]);
+		if (tasks[i].networks == 1)
+		printf("- %d podmreža sa %d računara\n", tasks[i].networks, tasks[i].computers);
 		else
-		printf("- %d podmreže sa %d računara\n", tasks.networks[i], tasks.computers[i]);
+		printf("- %d podmreže sa %d računara\n", tasks[i].networks, tasks[i].computers);
 	return 0;
 }

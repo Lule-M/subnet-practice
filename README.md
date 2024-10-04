@@ -32,6 +32,7 @@ Alternatively, you can use the following code to save the output of the program 
 As of 4.10.2024:
 
 - [ ] implement support for windows systems (issues with rand_r calls)
-- [ ] implement language specifier
-- [ ] implement a solver/generation of a solutions file
+- [ ] allow for user to set the amount of generated tasks
+- [ ] ability to choose output language
+- [ ] generation of a solutions file
 
