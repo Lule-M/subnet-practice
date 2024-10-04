@@ -66,8 +66,8 @@ int main(int argc, char **argv)
 	printf("Kompanija X poseduje opseg adresa klase %c, %d.%d.%d.%d. Treba napraviti šemu podmrežavanja tako da se obezbedi:\n", address.class, address.octets[0], address.octets[1], address.octets[2], address.octets[3]);
 	for (int i = 0; i < 4; i++)
 		if (tasks[i].networks == 1)
-		printf("- %d podmreža sa %d računara\n", tasks[i].networks, tasks[i].computers);
+			printf("- %d podmreža sa %d računara\n", tasks[i].networks, tasks[i].computers);
 		else
-		printf("- %d podmreže sa %d računara\n", tasks[i].networks, tasks[i].computers);
+			printf("- %d podmreže sa %d računara\n", tasks[i].networks, tasks[i].computers);
 	return 0;
 }
