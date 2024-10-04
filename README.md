@@ -6,8 +6,8 @@ A simple CLI tool used for generating subnetting problems. Intended for students
 
 Just compile from source (until a makefile is made or something)
 
-[!CAUTION]
-Builds currently fail on Windows systems.
+> [!CAUTION]
+> Builds currently fail on Windows systems.
 
 ## How to use
 
@@ -31,7 +31,7 @@ Alternatively, you can use the following code to save the output of the program 
 
 As of 4.10.2024:
 
-[ ] implement support for windows systems (issues with rand_r calls)
-[ ] implement language specifier
-[ ] implement a solver/generation of a solutions file
+- [ ] implement support for windows systems (issues with rand_r calls)
+- [ ] implement language specifier
+- [ ] implement a solver/generation of a solutions file
 
